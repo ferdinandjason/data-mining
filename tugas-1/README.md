@@ -6,6 +6,7 @@
     - [Dataset `Adult` :](#dataset-adult-)
     - [Tugas](#tugas)
     - [Implementasi](#implementasi)
+    - [Laporan](#laporan)
     - [Requirement](#requirement)
     - [Data Dictionary `Adult` :](#data-dictionary-adult-)
 
@@ -34,6 +35,10 @@ Dataset yang dianalisis adalah dataset `Adult` dari UCI Machine Learning Reposit
 
 ## Implementasi
 Implementasi dapat diakses pada ![LINK](tugas-1.ipynb)
+
+## Laporan
+- Laporan dalam bentuk Latex dapat diakses pada ![LINK](tugas-1.tex)
+- Laporan dalam bentuk PDF dapat diakses pada ![LINK](tugas_1.pdf)
 
 ## Requirement
 - Tool
