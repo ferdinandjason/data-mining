@@ -1,0 +1,1240 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{tugas-2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Adult Data Set Analysis}\label{adult-data-set-analysis}
+
+This dataset analysis task is carried out by: - Nuzha Musyafira -
+05111640000014 - Ferdinand Jason Gondowijoyo - 05111640000033 - Nurlita
+Dhuha Fatmawati - 05111640000092 - Jonathan Rehuel Lewerissa -
+05111640000105
+
+    \subsection{Introduction}\label{introduction}
+
+On this dataset analysis task, we will analyze the Adult Data Set. The
+Adult Data Set (also known as the Census Dataset) is a dataset that aims
+to predict whether a person's income exceeds \$50000 per year based on
+their census data.
+
+This data set can be downloaded from
+\textbf{\url{https://archive.ics.uci.edu/ml/datasets/adult}}.
+
+    \subsection{Preparation}\label{preparation}
+
+Let's first \texttt{import} some libraries that we are going to need for
+our analysis.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+        
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{k+kn}{import} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{as} \PY{n+nn}{preprocessing}
+        
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{impute} \PY{k}{import} \PY{n}{SimpleImputer}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    Then, we need to read the adult dataset from \texttt{data/adult.csv}
+which contains comma separated columns and mark the values \texttt{?} as
+missing data points
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{original\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{data/adult.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+            \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Workclass}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fnlwgt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Education}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Education\PYZhy{}Num}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Martial Status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Occupation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relationship}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Race}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Capital Gain}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Capital Loss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hours per week}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Country}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{n}{sep}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s*,}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s*}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{n}{engine}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{python}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+            \PY{n}{na\PYZus{}values}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{?}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{original\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}    Age         Workclass  fnlwgt  Education  Education-Num  \textbackslash{}
+        0   39         State-gov   77516  Bachelors             13   
+        1   50  Self-emp-not-inc   83311  Bachelors             13   
+        2   38           Private  215646    HS-grad              9   
+        3   53           Private  234721       11th              7   
+        4   28           Private  338409  Bachelors             13   
+        
+               Martial Status         Occupation   Relationship   Race     Sex  \textbackslash{}
+        0       Never-married       Adm-clerical  Not-in-family  White    Male   
+        1  Married-civ-spouse    Exec-managerial        Husband  White    Male   
+        2            Divorced  Handlers-cleaners  Not-in-family  White    Male   
+        3  Married-civ-spouse  Handlers-cleaners        Husband  Black    Male   
+        4  Married-civ-spouse     Prof-specialty           Wife  Black  Female   
+        
+           Capital Gain  Capital Loss  Hours per week        Country Target  
+        0          2174             0              40  United-States  <=50K  
+        1             0             0              13  United-States  <=50K  
+        2             0             0              40  United-States  <=50K  
+        3             0             0              40  United-States  <=50K  
+        4             0             0              40           Cuba  <=50K  
+\end{Verbatim}
+            
+    \subsection{Data Insight}\label{data-insight}
+
+First, we need to see the general statistical information of the
+dataset.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{summarize\PYZus{}data}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Continuous Data : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Categorical Data : }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+                \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{object} \PY{p}{:} \PY{c+c1}{\PYZsh{} Categorical Data}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{column}\PY{p}{)}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{summarize\PYZus{}data}\PY{p}{(}\PY{n}{original\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Continuous Data : 
+                Age        fnlwgt  Education-Num  Capital Gain  Capital Loss  \textbackslash{}
+count  32561.000000  3.256100e+04   32561.000000  32561.000000  32561.000000   
+mean      38.581647  1.897784e+05      10.080679   1077.648844     87.303830   
+std       13.640433  1.055500e+05       2.572720   7385.292085    402.960219   
+min       17.000000  1.228500e+04       1.000000      0.000000      0.000000   
+25\%       28.000000  1.178270e+05       9.000000      0.000000      0.000000   
+50\%       37.000000  1.783560e+05      10.000000      0.000000      0.000000   
+75\%       48.000000  2.370510e+05      12.000000      0.000000      0.000000   
+max       90.000000  1.484705e+06      16.000000  99999.000000   4356.000000   
+
+       Hours per week  
+count    32561.000000  
+mean        40.437456  
+std         12.347429  
+min          1.000000  
+25\%         40.000000  
+50\%         40.000000  
+75\%         45.000000  
+max         99.000000  
+
+
+
+Categorical Data : 
+
+Workclass
+Private             22696
+Self-emp-not-inc     2541
+Local-gov            2093
+State-gov            1298
+Self-emp-inc         1116
+Federal-gov           960
+Without-pay            14
+Never-worked            7
+Name: Workclass, dtype: int64
+
+
+Education
+HS-grad         10501
+Some-college     7291
+Bachelors        5355
+Masters          1723
+Assoc-voc        1382
+11th             1175
+Assoc-acdm       1067
+10th              933
+7th-8th           646
+Prof-school       576
+9th               514
+12th              433
+Doctorate         413
+5th-6th           333
+1st-4th           168
+Preschool          51
+Name: Education, dtype: int64
+
+
+Martial Status
+Married-civ-spouse       14976
+Never-married            10683
+Divorced                  4443
+Separated                 1025
+Widowed                    993
+Married-spouse-absent      418
+Married-AF-spouse           23
+Name: Martial Status, dtype: int64
+
+Occupation
+Prof-specialty       4140
+Craft-repair         4099
+Exec-managerial      4066
+Adm-clerical         3770
+Sales                3650
+Other-service        3295
+Machine-op-inspct    2002
+Transport-moving     1597
+Handlers-cleaners    1370
+Farming-fishing       994
+Tech-support          928
+Protective-serv       649
+Priv-house-serv       149
+Armed-Forces            9
+Name: Occupation, dtype: int64
+
+Relationship
+Husband           13193
+Not-in-family      8305
+Own-child          5068
+Unmarried          3446
+Wife               1568
+Other-relative      981
+Name: Relationship, dtype: int64
+
+Race
+White                 27816
+Black                  3124
+Asian-Pac-Islander     1039
+Amer-Indian-Eskimo      311
+Other                   271
+Name: Race, dtype: int64
+
+Sex
+Male      21790
+Female    10771
+Name: Sex, dtype: int64
+
+
+
+
+Country
+United-States                 29170
+Mexico                          643
+Philippines                     198
+Germany                         137
+Canada                          121
+Puerto-Rico                     114
+El-Salvador                     106
+India                           100
+Cuba                             95
+England                          90
+Jamaica                          81
+South                            80
+China                            75
+Italy                            73
+Dominican-Republic               70
+Vietnam                          67
+Guatemala                        64
+Japan                            62
+Poland                           60
+Columbia                         59
+Taiwan                           51
+Haiti                            44
+Iran                             43
+Portugal                         37
+Nicaragua                        34
+Peru                             31
+France                           29
+Greece                           29
+Ecuador                          28
+Ireland                          24
+Hong                             20
+Trinadad\&Tobago                  19
+Cambodia                         19
+Laos                             18
+Thailand                         18
+Yugoslavia                       16
+Outlying-US(Guam-USVI-etc)       14
+Honduras                         13
+Hungary                          13
+Scotland                         12
+Holand-Netherlands                1
+Name: Country, dtype: int64
+
+Target
+<=50K    24720
+>50K      7841
+Name: Target, dtype: int64
+
+
+    \end{Verbatim}
+
+    \subsubsection{Data Dictionary}\label{data-dictionary}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Categorial Attributes
+
+  \begin{itemize}
+  \tightlist
+  \item
+    workclass: (categorical) Private, Self-emp-not-inc, Self-emp-inc,
+    Federal-gov, Local-gov, State-gov, Without-pay, Never-worked.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Individual work category
+    \end{itemize}
+  \item
+    education: (categorical) Bachelors, Some-college, 11th, HS-grad,
+    Prof-school, Assoc-acdm, Assoc-voc, 9th, 7th-8th, 12th, Masters,
+    1st-4th, 10th, Doctorate, 5th-6th, Preschool.
+  \item
+    Individual's highest education degree
+  \item
+    marital-status: (categorical) Married-civ-spouse, Divorced,
+    Never-married, Separated, Widowed, Married-spouse-absent,
+    Married-AF-spouse.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Individual marital status
+    \end{itemize}
+  \item
+    occupation: (categorical) Tech-support, Craft-repair, Other-service,
+    Sales, Exec-managerial, Prof-specialty, Handlers-cleaners,
+    Machine-op-inspct, Adm-clerical, Farming-fishing, Transport-moving,
+    Priv-house-serv, Protective-serv, Armed-Forces.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Individual's occupation
+    \end{itemize}
+  \item
+    relationship: (categorical) Wife, Own-child, Husband, Not-in-family,
+    Other-relative, Unmarried.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Individual's relation in a family
+    \end{itemize}
+  \item
+    race: (categorical) White, Asian-Pac-Islander, Amer-Indian-Eskimo,
+    Other, Black.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Race of Individual
+    \end{itemize}
+  \item
+    sex: (categorical) Female, Male.
+  \item
+    native-country: (categorical) United-States, Cambodia, England,
+    Puerto-Rico, Canada, Germany, Outlying-US(Guam-USVI-etc), India,
+    Japan, Greece, South, China, Cuba, Iran, Honduras, Philippines,
+    Italy, Poland, Jamaica, Vietnam, Mexico, Portugal, Ireland, France,
+    Dominican-Republic, Laos, Ecuador, Taiwan, Haiti, Columbia, Hungary,
+    Guatemala, Nicaragua, Scotland, Thailand, Yugoslavia, El-Salvador,
+    Trinadad\&Tobago, Peru, Hong, Holand-Netherlands.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Individual's native country
+    \end{itemize}
+  \end{itemize}
+\item
+  Continuous Attributes
+
+  \begin{itemize}
+  \tightlist
+  \item
+    age: continuous.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Age of an individual
+    \end{itemize}
+  \item
+    education-num: number of education year, continuous.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Individual's year of receiving education
+    \end{itemize}
+  \item
+    fnlwgt: final weight, continuous.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      The weights on the CPS files are controlled to independent
+      estimates of the civilian noninstitutional population of the US.
+      These are prepared monthly for us by Population Division here at
+      the Census Bureau.
+    \end{itemize}
+  \item
+    capital-gain: continuous.
+  \item
+    capital-loss: continuous.
+  \item
+    hours-per-week: continuous.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Individual's working hour per week
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+    Check if there are any NaNs in the dataframe and count every columns
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{original\PYZus{}data}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} Age                  0
+        Workclass         1836
+        fnlwgt               0
+        Education            0
+        Education-Num        0
+        Martial Status       0
+        Occupation        1843
+        Relationship         0
+        Race                 0
+        Sex                  0
+        Capital Gain         0
+        Capital Loss         0
+        Hours per week       0
+        Country            583
+        Target               0
+        dtype: int64
+\end{Verbatim}
+            
+    \subsubsection{Histogram Analysis}\label{histogram-analysis}
+
+A histogram is an accurate representation of the distribution of
+numerical data. It is an estimate of the probability distribution of a
+continuous variable (quantitative variable) and was first introduced by
+Karl Pearson. It differs from a bar graph, in the sense that a bar graph
+relates two variables, but a histogram relates only one. To construct a
+histogram, the first step is to "bin" (or "bucket") the range of
+values---that is, divide the entire range of values into a series of
+intervals---and then count how many values fall into each interval. The
+bins are usually specified as consecutive, non-overlapping intervals of
+a variable. The bins (intervals) must be adjacent, and are often (but
+are not required to be) of equal size.
+
+Histogram can be summarized roughly as an inventory of what "kinds of
+items" you have and "how many of each kind" you have. In computer
+vision, histogram appears a lot and many times helps to introduce some
+sort of robustness to your method. For example a bunch of techniques
+called local features/descriptors make use of the histogram of the image
+gradient in an image region. This summary representation helps you
+compare different images without being affected too much by variations
+in pixel values, shifts and tilts, etc. that change the individual pixel
+values significantly. So, histogram has the benefit of a summary data
+structure that is robust to certain changes that you want to ignore in
+the raw data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{make\PYZus{}histogram}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{)}\PY{p}{)}
+            \PY{n}{COL} \PY{o}{=} \PY{l+m+mi}{3}
+            \PY{n}{ROW} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{COL}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{i} \PY{p}{,} \PY{n}{column} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}\PY{p}{:}
+                \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{n}{ROW}\PY{p}{,} \PY{n}{COL}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{column}\PY{p}{)}
+                \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{object}\PY{p}{:}
+                    \PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bar}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{ax}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{axes} \PY{o}{=} \PY{n}{ax}\PY{p}{)}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{rotation}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vertical}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                    
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+            
+        \PY{n}{make\PYZus{}histogram}\PY{p}{(}\PY{n}{original\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{tugas-2_files/tugas-2_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The histograms above shows that all of the data do not have a normal
+distribution, therefore requiring special methods to deal with the
+missing value.
+
+The \texttt{Country} feature analysis is described below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{p}{(}\PY{n}{original\PYZus{}data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Country}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{n}{original\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} United-States    0.895857
+        Mexico           0.019748
+        Philippines      0.006081
+        Germany          0.004207
+        Canada           0.003716
+        Name: Country, dtype: float64
+\end{Verbatim}
+            
+    Indeed! 89\% of the samples are for people from the US. Mexico comes
+next with less than 2\%.
+
+    \subsubsection{Boxplot Analysis}\label{boxplot-analysis}
+
+Boxplot is a method for graphically depicting groups of numerical data
+through their quartiles. Box plots handle large data effortlessly, but
+they do not retain the exact values and the details of the results of
+the distribution. These graphs allow a clear summary of large amounts of
+data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{make\PYZus{}boxplot}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+            \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{35}\PY{p}{)}\PY{p}{)}
+            \PY{n}{COL} \PY{o}{=} \PY{l+m+mi}{3}
+            \PY{n}{ROW} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{n}{COL}\PY{p}{)}
+            
+            \PY{n}{iterator} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+                \PY{k}{if} \PY{n}{df}\PY{o}{.}\PY{n}{dtypes}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{!=} \PY{n}{np}\PY{o}{.}\PY{n}{object}\PY{p}{:}
+                    \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{n}{ROW}\PY{p}{,} \PY{n}{COL}\PY{p}{,} \PY{n}{iterator}\PY{p}{)}
+                    \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{column}\PY{p}{)}
+                    \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{iterator}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                    
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{hspace}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{,} \PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{make\PYZus{}boxplot}\PY{p}{(}\PY{n}{original\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{tugas-2_files/tugas-2_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The Boxplot shows that some of the data have many outlier values. This
+is still acceptable as the main data because these data are consisted of
+categorical data types.
+
+    \subsubsection{Correlation Analysis}\label{correlation-analysis}
+
+We also need to do data correlation analysis to figure out the
+correlation between each feature inside the dataset. Below are the
+\texttt{pairplot} analysis of each features in the dataset.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ticks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{original\PYZus{}data}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{tugas-2_files/tugas-2_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Data Preprocessing}\label{data-preprocessing}
+
+The preprocessing that will be carried out Imputation using
+\texttt{Simpleimputer}. To replace the missing values in the categorical
+data, we will use the mode or the most frequent value that appeared in
+each column. On the \texttt{SimpleInputer} method, this is carried out
+using the
+\texttt{strategy=\textquotesingle{}most\_frequent\textquotesingle{}} as
+the parameter.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{imputer\PYZus{}modus} \PY{o}{=} \PY{n}{SimpleImputer}\PY{p}{(}\PY{n}{missing\PYZus{}values}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{n}{strategy}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{most\PYZus{}frequent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{imputer\PYZus{}modus}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{original\PYZus{}data}\PY{p}{)}
+        \PY{n}{imputed\PYZus{}data} \PY{o}{=} \PY{n}{imputer\PYZus{}modus}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{original\PYZus{}data}\PY{p}{)}
+        
+        \PY{n}{imputed\PYZus{}dataframe} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{imputed\PYZus{}data}\PY{p}{,}
+            \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Age}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Workclass}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{fnlwgt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Education}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Education\PYZhy{}Num}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Martial Status}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Occupation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relationship}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Race}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Capital Gain}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Capital Loss}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hours per week}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Country}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{imputed\PYZus{}dataframe}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}   Age         Workclass  fnlwgt  Education Education-Num      Martial Status  \textbackslash{}
+        0  39         State-gov   77516  Bachelors            13       Never-married   
+        1  50  Self-emp-not-inc   83311  Bachelors            13  Married-civ-spouse   
+        2  38           Private  215646    HS-grad             9            Divorced   
+        3  53           Private  234721       11th             7  Married-civ-spouse   
+        4  28           Private  338409  Bachelors            13  Married-civ-spouse   
+        
+                  Occupation   Relationship   Race     Sex Capital Gain Capital Loss  \textbackslash{}
+        0       Adm-clerical  Not-in-family  White    Male         2174            0   
+        1    Exec-managerial        Husband  White    Male            0            0   
+        2  Handlers-cleaners  Not-in-family  White    Male            0            0   
+        3  Handlers-cleaners        Husband  Black    Male            0            0   
+        4     Prof-specialty           Wife  Black  Female            0            0   
+        
+          Hours per week        Country Target  
+        0             40  United-States  <=50K  
+        1             13  United-States  <=50K  
+        2             40  United-States  <=50K  
+        3             40  United-States  <=50K  
+        4             40           Cuba  <=50K  
+\end{Verbatim}
+            
+    Below are the data correlation analysis using \texttt{heatmap} analysis.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} Encode the categorical features as numbers}
+         \PY{k}{def} \PY{n+nf}{number\PYZus{}encode\PYZus{}features}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+             \PY{n}{result} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+             \PY{n}{encoders} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+             \PY{k}{for} \PY{n}{column} \PY{o+ow}{in} \PY{n}{result}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{result}\PY{o}{.}\PY{n}{dtypes}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{object}\PY{p}{:}
+                     \PY{n}{encoders}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{result}\PY{p}{[}\PY{n}{column}\PY{p}{]} \PY{o}{=} \PY{n}{encoders}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{result}\PY{p}{[}\PY{n}{column}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{result}\PY{p}{,} \PY{n}{encoders}
+         
+         \PY{c+c1}{\PYZsh{} Calculate the correlation and plot it}
+         \PY{n}{encoded\PYZus{}data}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{number\PYZus{}encode\PYZus{}features}\PY{p}{(}\PY{n}{imputed\PYZus{}dataframe}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{encoded\PYZus{}data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{square}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{tugas-2_files/tugas-2_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The heatplot above shows that there is a high correlation between
+\texttt{Education} and \texttt{Education-Num}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{original\PYZus{}data}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Education}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Education\PYZhy{}Num}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}        Education  Education-Num
+         0      Bachelors             13
+         1      Bachelors             13
+         2        HS-grad              9
+         3           11th              7
+         4      Bachelors             13
+         5        Masters             14
+         6            9th              5
+         7        HS-grad              9
+         8        Masters             14
+         9      Bachelors             13
+         10  Some-college             10
+         11     Bachelors             13
+         12     Bachelors             13
+         13    Assoc-acdm             12
+         14     Assoc-voc             11
+\end{Verbatim}
+            
+    Two columns \texttt{Education} and \texttt{Education-Num} actually
+represent the same features, but encoded as strings and as numbers. We
+don't need the string representation, so we can just delete this column.
+Note that it is a much better option to delete the Education column as
+the Education-Num has the important property that the values are
+ordered: the higher the number, the higher the education that person
+has. This is a vaulable information a machine learning algorithm can
+use.
+
+    \subsection{Dimension Reduction and Feature
+Selection}\label{dimension-reduction-and-feature-selection}
+
+Data reduction using Dimensionality Reduction is needed to avoid the
+curse of dimensionality, help eliminate irrelevant features, reduce
+noise, time and space required in data mining, and also allow an easier
+visualization. In this analysis, we're going to use Principal Component
+Analysis (PCA) as our dimensionality reduction technique. Before using
+Principal Component Analysis on the dataset, dataset need standardized
+first using \texttt{StandardScaler}.
+
+On this dataset, we decided to reduce feature from 14 to 9.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+         
+         \PY{c+c1}{\PYZsh{} Field Education and Education\PYZhy{}Num represent the same feature, so we can drop one}
+         \PY{n}{encoded\PYZus{}data} \PY{o}{=} \PY{n}{encoded\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Education\PYZhy{}Num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{feature\PYZus{}dataframe} \PY{o}{=} \PY{n}{encoded\PYZus{}data}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{sc} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}
+         \PY{n}{standard\PYZus{}feature\PYZus{}dataframe} \PY{o}{=} \PY{n}{sc}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{feature\PYZus{}dataframe}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{pca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{9}\PY{p}{)}
+         \PY{n}{pca\PYZus{}feature\PYZus{}dataframe} \PY{o}{=} \PY{n}{pca}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{standard\PYZus{}feature\PYZus{}dataframe}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{pca\PYZus{}feature\PYZus{}dataframe}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 0.67920063 -0.61895733 -0.63335428 {\ldots}  0.19893869 -0.7327437
+   1.37479831]
+ [ 0.65654677 -0.62899563 -0.14880203 {\ldots} -0.73591687 -0.61334228
+  -0.40134703]
+ [ 1.03391718 -0.24882968 -0.00978604 {\ldots} -0.84665026  0.21546684
+  -0.97173434]
+ {\ldots}
+ [-1.91657756 -1.3383945   0.25273515 {\ldots} -0.56554022 -0.36181964
+   0.92643081]
+ [-1.57334105  0.0877552  -1.10546941 {\ldots} -0.93597509 -0.53386515
+   0.42197529]
+ [-0.58480885 -1.88611787  1.94542111 {\ldots} -0.57958575  2.81574889
+   2.40946941]]
+
+    \end{Verbatim}
+
+    \subsection{Handle Imbalanced Dataset}\label{handle-imbalanced-dataset}
+
+There is way to handle imbalanced dataset, called Sampling-based
+Approaches. Sampling the data modifies the distribution of training data
+so that minority class would be well-represented in training set.
+Sampling can be done by either undersampling the majority class or
+oversampling the minority class. Below we're going to try
+\texttt{SMOTE},\texttt{ADASYN}, \texttt{BorderLineSMOTE},
+\texttt{SMOTE\ +\ TomekLink}, \texttt{ADASYN\ +\ TomekLinks} and
+\texttt{BorderLineSMOTE\ +\ TomekLinks} methods for data sampling.
+
+    Before start, let's \texttt{import} some library we are going to need
+for handling imbalanced dataset and classification
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k+kn}{from} \PY{n+nn}{imblearn}\PY{n+nn}{.}\PY{n+nn}{under\PYZus{}sampling} \PY{k}{import} \PY{n}{TomekLinks}
+         \PY{k+kn}{from} \PY{n+nn}{imblearn}\PY{n+nn}{.}\PY{n+nn}{over\PYZus{}sampling} \PY{k}{import} \PY{n}{SMOTE}
+         \PY{k+kn}{from} \PY{n+nn}{imblearn}\PY{n+nn}{.}\PY{n+nn}{over\PYZus{}sampling} \PY{k}{import} \PY{n}{ADASYN}
+         \PY{k+kn}{from} \PY{n+nn}{imblearn}\PY{n+nn}{.}\PY{n+nn}{over\PYZus{}sampling} \PY{k}{import} \PY{n}{BorderlineSMOTE}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{precision\PYZus{}recall\PYZus{}fscore\PYZus{}support}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+         
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{StratifiedKFold}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n}{dataframe\PYZus{}sampling} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          
+          \PY{k}{def} \PY{n+nf}{make\PYZus{}sampling\PYZus{}dataset}\PY{p}{(}\PY{n}{feature}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{:}
+              \PY{k}{global} \PY{n}{dataframe\PYZus{}sampling}
+              
+              \PY{n}{sm} \PY{o}{=} \PY{n}{SMOTE}\PY{p}{(}\PY{n}{ratio}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{auto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{new\PYZus{}data\PYZus{}smote}\PY{p}{,} \PY{n}{new\PYZus{}target\PYZus{}smote} \PY{o}{=} \PY{n}{sm}\PY{o}{.}\PY{n}{fit\PYZus{}sample}\PY{p}{(}\PY{n}{feature}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMOTE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMOTE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}data\PYZus{}smote}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMOTE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}target\PYZus{}smote}
+              
+              \PY{n}{ada} \PY{o}{=} \PY{n}{ADASYN}\PY{p}{(}\PY{n}{ratio}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{auto}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{new\PYZus{}data\PYZus{}adasyn}\PY{p}{,} \PY{n}{new\PYZus{}target\PYZus{}adasyn} \PY{o}{=} \PY{n}{ada}\PY{o}{.}\PY{n}{fit\PYZus{}sample}\PY{p}{(}\PY{n}{feature}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ADASYN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ADASYN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}data\PYZus{}adasyn}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ADASYN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}target\PYZus{}adasyn}
+              
+              \PY{n}{blsm} \PY{o}{=} \PY{n}{BorderlineSMOTE}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{new\PYZus{}data\PYZus{}blsmote}\PY{p}{,} \PY{n}{new\PYZus{}target\PYZus{}blsmote} \PY{o}{=} \PY{n}{blsm}\PY{o}{.}\PY{n}{fit\PYZus{}sample}\PY{p}{(}\PY{n}{feature}\PY{p}{,} \PY{n}{target}\PY{p}{)}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BorderLineSMOTE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BorderLineSMOTE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}data\PYZus{}blsmote}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BorderLineSMOTE}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}target\PYZus{}blsmote}
+              
+              \PY{n}{t1} \PY{o}{=} \PY{n}{TomekLinks}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ratio}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{not minority}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{new\PYZus{}data\PYZus{}smote\PYZus{}tomek}\PY{p}{,} \PY{n}{new\PYZus{}target\PYZus{}smote\PYZus{}tomek} \PY{o}{=} \PY{n}{t1}\PY{o}{.}\PY{n}{fit\PYZus{}sample}\PY{p}{(}\PY{n}{new\PYZus{}data\PYZus{}smote}\PY{p}{,} \PY{n}{new\PYZus{}target\PYZus{}smote}\PY{p}{)}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMOTE\PYZus{}Tomek}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMOTE\PYZus{}Tomek}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}data\PYZus{}smote\PYZus{}tomek}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMOTE\PYZus{}Tomek}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}target\PYZus{}smote\PYZus{}tomek}
+              
+              \PY{n}{t2} \PY{o}{=} \PY{n}{TomekLinks}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ratio}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{not minority}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{new\PYZus{}data\PYZus{}adasyn\PYZus{}tomek}\PY{p}{,} \PY{n}{new\PYZus{}target\PYZus{}adasyn\PYZus{}tomek} \PY{o}{=} \PY{n}{t2}\PY{o}{.}\PY{n}{fit\PYZus{}sample}\PY{p}{(}\PY{n}{new\PYZus{}data\PYZus{}adasyn}\PY{p}{,} \PY{n}{new\PYZus{}target\PYZus{}adasyn}\PY{p}{)}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ADASYN\PYZus{}Tomek}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ADASYN\PYZus{}Tomek}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}data\PYZus{}adasyn\PYZus{}tomek}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ADASYN\PYZus{}Tomek}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}target\PYZus{}adasyn\PYZus{}tomek}
+              
+              \PY{n}{t3} \PY{o}{=} \PY{n}{TomekLinks}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{ratio}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{not minority}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{new\PYZus{}data\PYZus{}blsmote\PYZus{}tomek}\PY{p}{,} \PY{n}{new\PYZus{}target\PYZus{}blsmote\PYZus{}tomek} \PY{o}{=} \PY{n}{t3}\PY{o}{.}\PY{n}{fit\PYZus{}sample}\PY{p}{(}\PY{n}{new\PYZus{}data\PYZus{}blsmote}\PY{p}{,} \PY{n}{new\PYZus{}target\PYZus{}blsmote}\PY{p}{)}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BorderLineSMOTE\PYZus{}Tomek}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BorderLineSMOTE\PYZus{}Tomek}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}data\PYZus{}blsmote\PYZus{}tomek}
+              \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BorderLineSMOTE\PYZus{}Tomek}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}target\PYZus{}blsmote\PYZus{}tomek}
+              
+          \PY{n}{make\PYZus{}sampling\PYZus{}dataset}\PY{p}{(}\PY{n}{pca\PYZus{}feature\PYZus{}dataframe}\PY{p}{,} \PY{n}{encoded\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}    
+\end{Verbatim}
+
+
+    \subsection{Data Sampling and
+Classification}\label{data-sampling-and-classification}
+
+To reduce size of data, we use sampling method called
+\texttt{StratifiedKFold}, which is sampling the data and make cross
+validation through it. For classification we use
+\texttt{RandomForestClassifier} from \texttt{sklean}.
+
+For evaluation we use \texttt{Accuracy}, \texttt{Precision},
+\texttt{Recall}, and \texttt{Fmeasure}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{Counter}
+          
+          \PY{n}{dataframe\PYZus{}result} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          
+          \PY{k}{def} \PY{n+nf}{sampling\PYZus{}and\PYZus{}classify}\PY{p}{(}\PY{n}{key}\PY{p}{,} \PY{n}{feature}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{:}
+              \PY{k}{global} \PY{n}{dataframe\PYZus{}result}
+              \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+              \PY{n}{skf} \PY{o}{=} \PY{n}{StratifiedKFold}\PY{p}{(}\PY{n}{n\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+              \PY{n}{rfc} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+              
+              \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fmeasure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+              
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Original shape = }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{feature}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{Counter}\PY{p}{(}\PY{n}{target}\PY{p}{)}\PY{p}{)}
+              
+              \PY{n}{first} \PY{o}{=} \PY{k+kc}{True}
+              \PY{k}{for} \PY{n}{train}\PY{p}{,}\PY{n}{test} \PY{o+ow}{in} \PY{n}{skf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{feature}\PY{p}{,} \PY{n}{target}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{first} \PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{n}{Counter}\PY{p}{(}\PY{n}{target}\PY{p}{[}\PY{n}{train}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                      \PY{n}{first} \PY{o}{=} \PY{k+kc}{False}
+                  \PY{n}{rfc}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{feature}\PY{p}{[}\PY{n}{train}\PY{p}{]}\PY{p}{,} \PY{n}{target}\PY{p}{[}\PY{n}{train}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{predict} \PY{o}{=} \PY{n}{rfc}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{feature}\PY{p}{[}\PY{n}{test}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{score} \PY{o}{=} \PY{n}{precision\PYZus{}recall\PYZus{}fscore\PYZus{}support}\PY{p}{(}\PY{n}{target}\PY{p}{[}\PY{n}{test}\PY{p}{]}\PY{p}{,} \PY{n}{predict}\PY{p}{,} \PY{n}{average}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{binary}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                  \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{target}\PY{p}{[}\PY{n}{test}\PY{p}{]}\PY{p}{,} \PY{n}{predict}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{score}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{score}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fmeasure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{score}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+              
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fmeasure = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fmeasure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+              
+          \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{dataframe\PYZus{}sampling}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Classify and sampling with method }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{key}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+              \PY{n}{sampling\PYZus{}and\PYZus{}classify}\PY{p}{(}\PY{n}{key}\PY{p}{,} \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{feature}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{dataframe\PYZus{}sampling}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Classify and sampling with method SMOTE :
+
+Original shape = (49440, 9)
+Counter(\{0: 24720, 1: 24720\})
+Counter(\{0: 19776, 1: 19776\})
+Accuracy =  0.8791262135922329
+Precision =  0.8627030500262272
+Recall =  0.9016990291262136
+Fmeasure =  0.881565320480498
+
+Classify and sampling with method ADASYN :
+
+Original shape = (48928, 9)
+Counter(\{0: 24720, 1: 24208\})
+Counter(\{0: 19776, 1: 19366\})
+Accuracy =  0.8488794175947808
+Precision =  0.8303458867459842
+Recall =  0.8726843742536834
+Fmeasure =  0.8507110563206499
+
+Classify and sampling with method BorderLineSMOTE :
+
+Original shape = (49440, 9)
+Counter(\{0: 24720, 1: 24720\})
+Counter(\{0: 19776, 1: 19776\})
+Accuracy =  0.8795105177993527
+Precision =  0.8498984489159623
+Recall =  0.9215210355987054
+Fmeasure =  0.8839226470113845
+
+Classify and sampling with method SMOTE\_Tomek :
+
+Original shape = (48898, 9)
+Counter(\{0: 24720, 1: 24178\})
+Counter(\{0: 19776, 1: 19342\})
+Accuracy =  0.8857011424882542
+Precision =  0.8671270371503207
+Recall =  0.9079755761468409
+Fmeasure =  0.8869452836279926
+
+Classify and sampling with method ADASYN\_Tomek :
+
+Original shape = (48498, 9)
+Counter(\{0: 24290, 1: 24208\})
+Counter(\{0: 19432, 1: 19366\})
+Accuracy =  0.8590246884841992
+Precision =  0.8433856712874427
+Recall =  0.8810293052228995
+Fmeasure =  0.861556045193416
+
+Classify and sampling with method BorderLineSMOTE\_Tomek :
+
+Original shape = (48778, 9)
+Counter(\{0: 24720, 1: 24058\})
+Counter(\{0: 19776, 1: 19246\})
+Accuracy =  0.8872856930004461
+Precision =  0.8552505607917109
+Recall =  0.9285078977882669
+Fmeasure =  0.8901544032911133
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n}{figure} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{32}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ax1} \PY{o}{=} \PY{n}{figure}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{411}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{l+m+mf}{0.8}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{data\PYZus{}plot} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{n}{key} \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{dataframe\PYZus{}result} \PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{dataframe\PYZus{}result} \PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{dataframe\PYZus{}result} \PY{p}{]}\PY{p}{,}
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fmeasure}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fmeasure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{dataframe\PYZus{}result} \PY{p}{]}\PY{p}{,}  
+          \PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}plot}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}plot}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}plot}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data\PYZus{}plot}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fmeasure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{p}{[}\PY{n}{key} \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{dataframe\PYZus{}result}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{title}\PY{o}{.}\PY{n}{set\PYZus{}text}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Graphic Evaluation of different sampling method}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sampling Method}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+          
+          \PY{n}{key} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SMOTE}\PY{l+s+s1}{\PYZsq{}}
+          
+          \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{3}
+          \PY{n}{ax} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+          
+          \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{dataframe\PYZus{}result}\PY{p}{:}
+              \PY{n}{ax}\PY{p}{[}\PY{n}{counter}\PY{p}{]} \PY{o}{=} \PY{n}{figure}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{counter}\PY{p}{)}
+              \PY{n}{temp} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fmeasure}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{dataframe\PYZus{}result}\PY{p}{[}\PY{n}{key}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fmeasure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+              \PY{p}{\PYZcb{}}\PY{p}{)}
+              \PY{n}{ax}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{temp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{temp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+              \PY{n}{ax}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{temp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{temp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Precision}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+              \PY{n}{ax}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{temp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{temp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Recall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+              \PY{n}{ax}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{temp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{temp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fmeasure}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+              \PY{n}{ax}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+              \PY{n}{ax}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{o}{.}\PY{n}{title}\PY{o}{.}\PY{n}{set\PYZus{}text}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Evaluation Result of StratifiedKFold with }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n}{key}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ method}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{ax}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{ax}\PY{p}{[}\PY{n}{counter}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iterasi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{counter}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+              
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{tugas-2_files/tugas-2_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
