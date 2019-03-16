@@ -34,11 +34,11 @@ Dataset yang dianalisis adalah dataset `Adult` dari UCI Machine Learning Reposit
     - Penghilangan Noise
 
 ## Implementasi
-Implementasi dapat diakses pada ![LINK](tugas-1.ipynb)
+Implementasi dapat diakses pada [LINK](tugas-1.ipynb)
 
 ## Laporan
-- Laporan dalam bentuk Latex dapat diakses pada ![LINK](tugas-1.tex)
-- Laporan dalam bentuk PDF dapat diakses pada ![LINK](tugas_1.pdf)
+- Laporan dalam bentuk Latex dapat diakses pada [LINK](tugas-1.tex)
+- Laporan dalam bentuk PDF dapat diakses pada [LINK](tugas_1.pdf)
 
 ## Requirement
 - Tool
