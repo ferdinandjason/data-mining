@@ -84,7 +84,7 @@ Pertama-tama, mari kita ``import`` beberapa *libraries* yang akan kita butuhkan.
 
 [[INI BAGIAN IMPORT2]]
 
-Setelah itu, untuk pemrosesan citra terlebih dahulu kita menggunakan metode *Contrast Limited Adaptive Histogram Equalization* (CLAHE) dan algoritma *Haar Cascade* sebagai *classifier* mula-mula. Metode CLAHE dan *Haar* telah tersedia pada package ``cv2``.
+Setelah itu, untuk pemrosesan citra terlebih dahulu kita menggunakan metode *Contrast Limited Adaptive Histogram Equalization* (CLAHE) dan algoritma *Haar Cascade* sebagai *classifier* mula-mula. Metode CLAHE dan *Haar Cascade* telah tersedia pada package ``cv2``.
 
 [[INI YANG BAGIAN ABIS IMPORT2]]
 
@@ -100,7 +100,25 @@ CLAHE merupakan metode perluasan dari *Adaptive Histogram Equalization* (AHE) ya
 
 Dalam CLAHE, amplifikasi kontras di sekitar nilai piksel yang diberikan didapatkan dari gradien fungsi transformasi (sebanding dengan CDF) dan karenanya untuk nilai histogram pada nilai piksel tersebut. CLAHE membatasi amplifikasi dengan memotong histogram pada nilai yang telah ditentukan sebelum menghitung CDF. 
 
-[[bagian in [3], haar belum dijelasin]]
+*Haar Cascade* adalah algoritma *object detection* yang digunakan untuk mengidentifikasi objek dalam gambar atau video. *Haar Cascade* merupakan pendekatan berbasis *machine learning* di mana fungsi *cascade* dilatih dari banyak gambar positif dan negatif, kemudian digunakan untuk mendeteksi objek dalam gambar lain. *Haar Cascade* terkenal karena mampu mendeteksi wajah dan bagian tubuh dalam suatu gambar, tetapi dapat dilatih untuk mengidentifikasi hampir semua objek, sebagai contoh *face detection*. Algoritma ini mempunyai 4 tahap, yaitu:
+- *Haar Feature Selection*
+- *Creating  Integral Images*
+- *Adaboost Training*
+- *Cascading Classifiers*
+
+Awalnya, algoritma ini mengumpulkan banyak gambar positif (wajah) dan gambar negatif (tanpa wajah) untuk melatih *classifier*. Kemudian, kita perlu mengekstrak fitur darinya. *Integral Images* digunakan untuk mempercepat proses ini.
+
+![gambar](img/haar1.JPG)
+
+*Gambar 3. Integral Images yang digunakan untuk Haar Features*
+
+Di antara semua fitur yang dikalkulasi, beberapa fitur dianggap tidak relevan. Contohnya, pada gambar di bawah ini, baris teratas menunjukkan dua fitur bagus. Fitur pertama yang dipilih tampaknya berfokus pada properti bahwa daerah mata seringkali lebih gelap daripada daerah hidung dan pipi. Fitur kedua yang dipilih bergantung pada properti bahwa mata lebih gelap daripada pangkal hidung. Tetapi hal yang sama tidak berlaku pada pipi atau daerah lain.
+
+![gambar](img/haar2.PNG)
+
+Untuk mengatasi hal tersebut, digunakan lah konsep yang disebut ``Adaboost`` untuk memilih fitur terbaik dan sekaligus melatih *classifier* yang menggunakannya. Selama fase deteksi, Karena setiap *Haar Features* hanya merupakan *classifier* 'lemah' (kualitas pendeteksiannya sedikit lebih baik daripada perkiraan acak), sejumlah besar *Haar Features* diorganisasikan ke dalam ``CascadeClassifier`` untuk membentuk *classifier* yang kuat.
+
+[[bagian in [3]]]
 
 Untuk menelusuri struktur direktori pada dataset, kita dapat menggunakan fungsi `os.walk()`. Fungsi ``load_emotion_labels()`` digunakan untuk memproses dan menyimpan label-label.
 
