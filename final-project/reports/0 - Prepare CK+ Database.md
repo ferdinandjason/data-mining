@@ -5,6 +5,7 @@ Pada pengerjaan *Final Project* kali ini, dataset yang kami gunakan adalah *The 
 Setiap ekspresi yang terdapat pada dataset CK+ diberi label berdasarkan aturan-aturan spesifikasi *The Facial Action Coding System* (FACS). FACS sendiri terdiri dari *Action Units* (AU) dan deskripsi dari beberapa pergerakan otot wajah. Berikut merupakan hasil dari penentuan label menurut FACS:
 
 ![gambar](img/facs%20(2).PNG)
+
 *Tabel 1. Frekuensi jumlah AU yang terdeteksi pada dataset*
 
 ![gambar](img/facs.PNG)
@@ -76,3 +77,33 @@ Data label emosi yang terdapat pada `Emotion/.../.../...txt` berisi teks yang be
 - 5 = Bahagia (*Happy*)
 - 6 = Sedih (*Sadness*)
 - 7 = Terkejut (*Surprise*)
+
+## Pre-processing
+
+Pertama-tama, mari kita ``import`` beberapa *libraries* yang akan kita butuhkan.
+
+[[INI BAGIAN IMPORT2]]
+
+Setelah itu, untuk pemrosesan citra terlebih dahulu kita menggunakan metode *Contrast Limited Adaptive Histogram Equalization* (CLAHE) dan algoritma *Haar Cascade* sebagai *classifier* mula-mula. Metode CLAHE dan *Haar* telah tersedia pada package ``cv2``.
+
+[[INI YANG BAGIAN ABIS IMPORT2]]
+
+CLAHE merupakan metode perluasan dari *Adaptive Histogram Equalization* (AHE) yang merupakan pengembangan dari *Histogram Equalization* itu sendiri. AHE biasa cenderung meng-*over* amplifikasi kontras di daerah distribusinya, karena histogram di daerah tersebut sangat terkonsentrasi. Sebagai hasilnya, AHE dapat menyebabkan *noise* diperkuat di daerah yang hampir konstan. CLAHE adalah varian AHE di mana amplifikasi kontras terbatas, sehingga dapat mengurangi masalah amplifikasi *noise* ini. Berikut perbedaan antara HE, AHE, dan CLAHE:
+
+![gambar](img/clahe1.PNG)
+
+*Gambar 1. HE vs AHE vs CLAHE*
+
+![gambar](img/clahe2.PNG)
+
+*Gambar 2. HE vs AHE vs CLAHE*
+
+Dalam CLAHE, amplifikasi kontras di sekitar nilai piksel yang diberikan didapatkan dari gradien fungsi transformasi (sebanding dengan CDF) dan karenanya untuk nilai histogram pada nilai piksel tersebut. CLAHE membatasi amplifikasi dengan memotong histogram pada nilai yang telah ditentukan sebelum menghitung CDF. 
+
+[[bagian in [3], haar belum dijelasin]]
+
+Untuk menelusuri struktur direktori pada dataset, kita dapat menggunakan fungsi `os.walk()`. Fungsi ``load_emotion_labels()`` digunakan untuk memproses dan menyimpan label-label.
+
+[[INI BAGIAN load_emotion_label()]]
+
+Selanjutnya, kita memproses data image dan 
