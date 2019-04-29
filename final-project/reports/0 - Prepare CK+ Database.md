@@ -120,8 +120,12 @@ Untuk mengatasi hal tersebut, digunakan lah konsep yang disebut ``Adaboost`` unt
 
 [[bagian in [3]]]
 
-Untuk menelusuri struktur direktori pada dataset, kita dapat menggunakan fungsi `os.walk()`. Fungsi ``load_emotion_labels()`` digunakan untuk memproses dan menyimpan label-label.
+Untuk menelusuri struktur direktori pada dataset, kita dapat menggunakan fungsi ``os.walk()``. Fungsi ``load_emotion_labels()`` digunakan untuk memproses dan menyimpan label-label.
 
 [[INI BAGIAN load_emotion_label()]]
 
-Selanjutnya, kita memproses data image dan 
+Selanjutnya, kita memproses data image dan label. ``fid`` mengindikasikan *face ID*, mewakili setiap ekspresi puncak pada tiap ekspresi di tiap sample. Untuk memangkas dan merapikan data, ``fid`` hanya mengambil 2 karakter terakhir dari nama file (``[-2:]``).
+
+[[INI BAGIAN load_extended CK()]]
+
+Kemudian, data citra dan label yang telah disinkronisasikan dikompres menjadi satu menggunakan ``pickle.dump()``. *Output* dari proses ini adalah file yang memuat data citra dan label dalam bentuk ekstensi `.pickle`. Untuk proses selanjutnya, pemanggilan dataset dapat dilakukan melalui file `.pickle` yang telah terbentuk.
