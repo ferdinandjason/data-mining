@@ -1,4 +1,6 @@
-# Dataset
+# Dataset CK+
+
+## Penjelasan Dataset
 
 Pada pengerjaan *Final Project* kali ini, dataset yang kami gunakan adalah *The Extended Cohn-Kanade* (CK+). CK+ merupakan versi perluasan dari dataset *Cohn-Kanade* (CK). Pada tahun 2000, dataset CK dirilis dengan tujuan mempromosikan penelitian untuk secara otomatis mendeteksi ekspresi wajah individu. Sejak itu, dataset CK telah menjadi salah satu *test-bed* yang paling banyak digunakan untuk pengembangan dan evaluasi algoritma.
 
@@ -9,6 +11,7 @@ Setiap ekspresi yang terdapat pada dataset CK+ diberi label berdasarkan aturan-a
 *Tabel 1. Frekuensi jumlah AU yang terdeteksi pada dataset*
 
 ![gambar](img/facs.PNG)
+
 *Tabel 2. Deskripsi ekspresi berdasarkan FACS*
 
 ## Distribusi dan Struktur Dataset
@@ -66,7 +69,7 @@ Berikut contoh struktur dalam dataset:
 1423 directories, 11044 files
 ```
 
-Pada `S005/001/S005_001_00000011.png`, `S005` mengindikasikan `S`ample potret individu ke-`005`, `001` mengindikasikan ekspresi ke-`001` yang diemosikan, dan sekuens terakhir (contoh: `00000011`) merupakan urutan *frame* dari setiap ekspresi. Oleh karena itu, walaupun terdapat banyak *frame* pada penangkapan setiap ekspresi, hanya *frame* terakhir yang memiliki struktur yang sama dengan label emosi. *Frame* terakhir dianggap sebagai puncak dari ekspresi yang paling sesuai menggambarkan emosi.
+Pada `S005/001/S005_001_00000011.png`, `S005` mengindikasikan sample potret individu ke-`005`, `001` mengindikasikan ekspresi ke-`001` yang diemosikan, dan sekuens terakhir (contoh: `00000011`) merupakan urutan *frame* dari setiap ekspresi. Oleh karena itu, walaupun terdapat banyak *frame* pada penangkapan setiap ekspresi, hanya *frame* terakhir yang memiliki struktur yang sama dengan label emosi. *Frame* terakhir dianggap sebagai puncak dari ekspresi yang paling sesuai menggambarkan emosi.
 
 Data label emosi yang terdapat pada `Emotion/.../.../...txt` berisi teks yang bernilai 0-7 ('0.00000000e + 00', '1.00000000e + 00', '2.00000000e + 00', ..., '7.00000000e + 00'). Nilai-nilai tersebut merupakan konversi dari ekspresi sesungguhnya sebagai berikut:
 - 0 = Netral (*Neutral*)
@@ -78,15 +81,15 @@ Data label emosi yang terdapat pada `Emotion/.../.../...txt` berisi teks yang be
 - 6 = Sedih (*Sadness*)
 - 7 = Terkejut (*Surprise*)
 
-## Pre-processing
+## Preprocess Dataset
 
 Pertama-tama, mari kita ``import`` beberapa *libraries* yang akan kita butuhkan.
 
-[[INI BAGIAN IMPORT2]]
+```[1]```
 
 Setelah itu, untuk pemrosesan citra terlebih dahulu kita menggunakan metode *Contrast Limited Adaptive Histogram Equalization* (CLAHE) dan algoritma *Haar Cascade* sebagai *classifier* mula-mula. Metode CLAHE dan *Haar Cascade* telah tersedia pada package ``cv2``.
 
-[[INI YANG BAGIAN ABIS IMPORT2]]
+```[2]```
 
 CLAHE merupakan metode perluasan dari *Adaptive Histogram Equalization* (AHE) yang merupakan pengembangan dari *Histogram Equalization* itu sendiri. AHE biasa cenderung meng-*over* amplifikasi kontras di daerah distribusinya, karena histogram di daerah tersebut sangat terkonsentrasi. Sebagai hasilnya, AHE dapat menyebabkan *noise* diperkuat di daerah yang hampir konstan. CLAHE adalah varian AHE di mana amplifikasi kontras terbatas, sehingga dapat mengurangi masalah amplifikasi *noise* ini. Berikut perbedaan antara HE, AHE, dan CLAHE:
 
@@ -118,14 +121,36 @@ Di antara semua fitur yang dikalkulasi, beberapa fitur dianggap tidak relevan. C
 
 Untuk mengatasi hal tersebut, digunakan lah konsep yang disebut ``Adaboost`` untuk memilih fitur terbaik dan sekaligus melatih *classifier* yang menggunakannya. Selama fase deteksi, Karena setiap *Haar Features* hanya merupakan *classifier* 'lemah' (kualitas pendeteksiannya sedikit lebih baik daripada perkiraan acak), sejumlah besar *Haar Features* diorganisasikan ke dalam ``CascadeClassifier`` untuk membentuk *classifier* yang kuat.
 
-[[bagian in [3]]]
+```[3]```
 
-Untuk menelusuri struktur direktori pada dataset, kita dapat menggunakan fungsi ``os.walk()``. Fungsi ``load_emotion_labels()`` digunakan untuk memproses dan menyimpan label-label.
+Setiap *set frame* pada individu terdapat perubahan emosi dari `Neutral` ke emosi tertentu yang ditandai dengan *frame counter*. Sehingga pada dataset CK+ kelompok kami menggunakan `25%` pertama sebagai label `Neutral` dan `25%` terakhir sebagai label emosi. Sehingga didapatkan label `Neutral` lebih banyak dari pada label emosi lain.
 
-[[INI BAGIAN load_emotion_label()]]
+```[4]```
 
-Selanjutnya, kita memproses data image dan label. ``fid`` mengindikasikan *face ID*, mewakili setiap ekspresi puncak pada tiap ekspresi di tiap sample. Untuk memangkas dan merapikan data, ``fid`` hanya mengambil 2 karakter terakhir dari nama file (``[-2:]``).
+Untuk menelusuri struktur direktori pada dataset, kita dapat menggunakan fungsi ``os.walk()`` untuk masuk secara rekursi ke dalam folder. Fungsi ``load_emotion_labels()`` digunakan untuk memproses dan menyimpan label-label.
 
-[[INI BAGIAN load_extended CK()]]
+```[5]```
 
-Kemudian, data citra dan label yang telah disinkronisasikan dikompres menjadi satu menggunakan ``pickle.dump()``. *Output* dari proses ini adalah file yang memuat data citra dan label dalam bentuk ekstensi `.pickle`. Untuk proses selanjutnya, pemanggilan dataset dapat dilakukan melalui file `.pickle` yang telah terbentuk.
+Untuk mengintegrasikan label emosi wajah dan dataset emosi wajah, dibuatkan variabel  `fid` mengindikasikan *face ID* yang bernilai `SXXX/00X` yang menandakan subject ke-`XXX` dan take frame ke-`X`, yang terdapat pada direkrori label emosi dan direktori dataset emosi.
+
+```[6]```
+
+Kemudian, data citra dan label yang telah disinkronisasikan dikompres menjadi satu menggunakan ``pickle.dump()``. *Output* dari proses ini adalah file yang memuat data citra dan label dalam bentuk ekstensi `.pickle`. Untuk proses selanjutnya, pemanggilan dataset dapat dilakukan melalui file `.pickle` yang telah terbentuk. File pickle ini memiliki format `[<data gambar>, <data label>]`.
+
+```[7]```
+
+```[8]```
+
+Menggunakan metode diatas, didapatkan gambar serta label dengan jumlah sebagai berikut :
+```
+Neutral     => 1262 Face Image
+Anger       =>  354 Face Image
+Contempt    =>   93 Face Image
+Disgust     =>  343 Face Image
+Fear        =>  191 Face Image
+Happy       =>  476 Face Image
+Sad         =>  197 Face Image
+Surprise    =>  514 Face Image
+------------------------------ +
+Total       => 3430 Face Image
+```
