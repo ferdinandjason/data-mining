@@ -154,3 +154,6 @@ Surprise    =>  514 Face Image
 ------------------------------ +
 Total       => 3430 Face Image
 ```
+
+Berikut merupakan ringkasan proses preprocessing pada wajah menggunakan algoritma diatas
+![gambar-face](img/proses-gambar.png)
