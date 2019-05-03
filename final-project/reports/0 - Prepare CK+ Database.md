@@ -1,4 +1,4 @@
-# Dataset CK+
+# Analisa Dataset
 
 ## Penjelasan Dataset
 
@@ -6,11 +6,11 @@ Pada pengerjaan *Final Project* kali ini, dataset yang kami gunakan adalah *The 
 
 Setiap ekspresi yang terdapat pada dataset CK+ diberi label berdasarkan aturan-aturan spesifikasi *The Facial Action Coding System* (FACS). FACS sendiri terdiri dari *Action Units* (AU) dan deskripsi dari beberapa pergerakan otot wajah. Berikut merupakan hasil dari penentuan label menurut FACS:
 
-![gambar](img/facs%20(2).PNG)
+![au-code](img/facs%20(2).PNG)
 
 *Tabel 1. Frekuensi jumlah AU yang terdeteksi pada dataset*
 
-![gambar](img/facs.PNG)
+![facs-code](img/facs.PNG)
 
 *Tabel 2. Deskripsi ekspresi berdasarkan FACS*
 
